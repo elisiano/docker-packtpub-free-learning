@@ -13,10 +13,13 @@ Additionally, if you want to receive a notification on pushbullet (how to get an
 - `PB_EMAIL`
 - `PB_TOKEN`
 
+
 Basic Example (just get the ebook)
 ```bash
 docker run --rm -e PP_EMAIL=my@email.com -e PP_PASSWORD=myP455 elisiano/packtpub-free-learning
 ```
+
+
 Example with pushbullet
 ```bash
 docker run --rm -e PP_EMAIL=my@email.com -e PP_PASSWORD=myP455 -e PB_EMAIL=my@email.com PB_TOKEN=myT0k3n elisiano/packtpub-free-learning
