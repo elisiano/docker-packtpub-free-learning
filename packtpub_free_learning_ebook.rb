@@ -18,6 +18,8 @@ end
 mechanize = Mechanize.new
 
 page = mechanize.get('https://www.packtpub.com/packt/offers/free-learning')
+title = page.at('.dotd-title h2').inner_text.strip
+puts "Adding " + title + " to library"
 loggedin_page = page.form_with(:id => 'packt-user-login-form') do |form|
 	email_field = form.field_with(:id => 'email')
 	email_field.value = ENV['PP_EMAIL']
@@ -28,7 +30,6 @@ end.submit
 
 if ENV.has_key?('PB_EMAIL') and ! (ENV['PB_EMAIL']).empty? and ENV.has_key?('PB_TOKEN') and ! (ENV['PB_TOKEN']).empty?
 	puts "Sending notification to " + ENV['PB_EMAIL'] + " via pushbullet..."
-	title = page.at('.dotd-title h2').inner_text.strip
 	link = page.link_with(:href => /freelearning-claim/)
 	page = link.click
 	pb_client = Washbullet::Client.new(ENV['PB_TOKEN'])
