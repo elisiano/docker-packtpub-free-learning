@@ -27,9 +27,13 @@ loggedin_page = page.form_with(:id => 'packt-user-login-form') do |form|
 	password_field.value = ENV['PP_PASSWORD']
 end.submit
 
+begin
+	link = page.link_with(:href => /freelearning-claim/)		
+	page = link.click
+rescue
+	abort("A problem occured simulating the click")
+end
 puts "Adding " + title + " to library"
-link = page.link_with(:href => /freelearning-claim/)
-page = link.click
 
 if ENV.has_key?('PB_EMAIL') and ! (ENV['PB_EMAIL']).empty? and ENV.has_key?('PB_TOKEN') and ! (ENV['PB_TOKEN']).empty?
 	puts "Sending notification to " + ENV['PB_EMAIL'] + " via pushbullet..."
