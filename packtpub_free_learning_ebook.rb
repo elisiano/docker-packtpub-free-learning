@@ -28,7 +28,7 @@ loggedin_page = page.form_with(:id => 'packt-user-login-form') do |form|
 end.submit
 
 begin
-	link = page.link_with(:href => /freelearning-claim/)		
+	link = page.link_with(:href => "/packt/offers/free-learning")
 	page = link.click
 rescue
 	abort("A problem occured simulating the click")
